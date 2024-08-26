@@ -7,6 +7,7 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
+
 const showingNavigationDropdown = ref(false);
 </script>
 
@@ -32,6 +33,11 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
+                                <NavLink :href="route('articles')" >
+                                   <h2>Articles</h2>
+                                </NavLink>
+
+
                             </div>
                         </div>
 
