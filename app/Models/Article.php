@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model
 {
@@ -15,11 +16,17 @@ class Article extends Model
         "user_id",
     ];
     // un article peut avoir plusieurs commentaires
-    public function comments()
+    
+    public function article(): HasMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Article::class);
     }
-    // un article n'a qu'un seul user
+
+    /**
+     * Relation avec l'utilisateur.
+     *
+     * Un commentaire appartient à un utilisateur.
+     */
     public function user()
     {
         return $this->belongsTo(User::class);

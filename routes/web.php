@@ -20,7 +20,19 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/articles', function () {
     return Inertia::render('Article');
+
 })->middleware(['auth', 'verified'])->name('articles');
+
+Route::get('/create', function () {
+    return Inertia::render('Articles/Create');
+})->middleware(['auth', 'verified'])->name('article.create');
+
+Route::resource('Articles', ArticleController::class)
+    ->only(['index', 'store'])
+    ->middleware(['auth', 'verified']);
+
+
+
 
 
 

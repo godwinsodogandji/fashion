@@ -121,6 +121,9 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                           Articles
+                        </ResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -135,7 +138,7 @@ const showingNavigationDropdown = ref(false);
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
+                                Se déconnecter
                             </ResponsiveNavLink>
                         </div>
                     </div>
