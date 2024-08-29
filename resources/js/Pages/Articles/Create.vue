@@ -1,21 +1,25 @@
 
 <script setup>
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { useForm } from "@inertiajs/vue3";
+import InputError from '@/Components/InputError.vue';
+import Article from '@/Components/Article.vue';
+
+defineProps(['articles']);
 const form = useForm({
   title: "",
   body: "",
-
 });
 </script>
- 
+
 <template>
   <AuthenticatedLayout>
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-      <form method="post"
+      <form
+
         @submit.prevent="
-          form.post(route('article.create'), { onSuccess: () => form.reset() })
+          form.post(route('articles.store'), { onSuccess: () => form.reset() })
         "
       >
         <input
@@ -32,7 +36,8 @@ const form = useForm({
         />
 
         <InputError :message="form.errors.body" class="mt-2 mx-3" />
-        <input type="file"
+        <input
+          type="file"
           placeholder="Choisir une image"
           class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
         />
@@ -40,8 +45,15 @@ const form = useForm({
         <InputError :message="form.errors.image" class="mt-2 mx-3" />
 
         <PrimaryButton class="mt-4">Sauvegarder</PrimaryButton>
-
       </form>
+
+      <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+                <Chirp
+                    v-for="article in articles"
+                    :key="article.id"
+                    :article="article"
+                />
+            </div>
     </div>
   </AuthenticatedLayout>
 </template>

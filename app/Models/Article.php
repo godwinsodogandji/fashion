@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Access\Gate;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,15 +14,12 @@ class Article extends Model
     protected $fillable = [
         "title",
         "body",
-        "image",
-        "user_id",
+        // "image",
+
     ];
     // un article peut avoir plusieurs commentaires
-    
-    public function article(): HasMany
-    {
-        return $this->hasMany(Article::class);
-    }
+
+   
 
     /**
      * Relation avec l'utilisateur.
@@ -31,4 +30,5 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 }

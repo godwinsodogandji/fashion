@@ -8,74 +8,41 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Response;
 
+
 class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::with('user')->get(); // Charger l'utilisateur associé si nécessaire
+        $article = Article::all(); // Charger l'utilisateur associé si nécessaire
         return Inertia::render('Articles/Index', [
-            'articles' => $articles
+            'article' => $article
         ]);
+
+
     }
 
     public function create()
     {
-        return Inertia::render('Articles/Create');
+        return Inertia::render('Articles/Create', [
+            'articles' => Article::with('user:id,name')->latest()->get(),
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
     {
+        // dd($request);
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'body' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
-            'user_id' => 'nullable|exists:users,id',
+
         ]);
-        $request->user()->Articles()->create($validated);
-        // // Gestion du téléchargement de l'image
-        // $imagePath = null;
-        // if ($request->hasFile('image')) {
-        //     $imagePath = $request->file('image')->store('images', 'public');
-        // }
-
-       
-
-        return redirect(route('article.index'));
+        $request->user()->articles()->create($validated);
+        return redirect(route('articles'));
     }
-
-    public function edit(Article $article)
+    public function getArticle()
     {
-        return Inertia::render('Articles/Edit', [
-            'article' => $article
-        ]);
+        $article = Article::all();
+        return response()->json($article, 200);
     }
 
-    public function update(Request $request, Article $article)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'body' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
-            'user_id' => 'nullable|exists:users,id',
-        ]);
-
-        // Gestion du téléchargement de l'image
-        $imagePath = $article->image;
-        if ($request->hasFile('image')) {
-            // Supprimer l'ancienne image si elle existe
-            if ($imagePath && Storage::exists("public/{$imagePath}")) {
-                Storage::delete("public/{$imagePath}");
-            }
-            $imagePath = $request->file('image')->store('images', 'public');
-        }
-
-        $article->update([
-            'title' => $request->title,
-            'body' => $request->body,
-            'image' => $imagePath,
-            'user_id' => $request->user_id,
-        ]);
-
-        return redirect()->route('articles.index');
-    }
 }
