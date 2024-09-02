@@ -14,12 +14,12 @@ class Article extends Model
     protected $fillable = [
         "title",
         "body",
-        // "image",
+       'image'
 
     ];
     // un article peut avoir plusieurs commentaires
 
-   
+
 
     /**
      * Relation avec l'utilisateur.

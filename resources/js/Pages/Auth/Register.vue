@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
+
 const form = useForm({
     name: '',
     email: '',
@@ -21,6 +22,7 @@ const submit = () => {
 </script>
 
 <template>
+
     <GuestLayout>
         <Head title="Register" />
 
@@ -100,5 +102,6 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+
     </GuestLayout>
 </template>

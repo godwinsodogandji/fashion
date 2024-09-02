@@ -29,64 +29,74 @@ function handleImageError() {
 <template>
   <Head title="Welcome" />
 
-  <div>
-    <div>
-      <div>
-        <header>
-          <nav v-if="canLogin">
-            <Link
-              v-if="$page.props.auth.user"
-              :href="route('dashboard')"
+  <div class="bg-gray-800">
+    <div class="relative flex h-16 items-center justify-between">
+      <div >
+        <div class="hidden sm:ml-6 sm:block">
+          <header  >
+            <div class="flex space-x-4">
+              <nav v-if="canLogin" >
+                <Link
+                  v-if="$page.props.auth.user"
+                  :href="route('dashboard')"
+                  class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                  aria-current="page"
+                >
+                  Dashboard
+                </Link>
 
-            >
-              Dashboard
-            </Link>
-
-            <template v-else>
-              <div class="  ">
-                <ul class="nav nav-pills">
-                  <li class="nav-item">
-                    <Link
-                      :href="route('login')"
-                      id="login"
-                      class="nav-link"
-                      style="color: black; box-shadow: 50px"
-                    >
-                      Se connecter
-                    </Link>
-                  </li>
-                  <li class="nav-item">
-                    <Link
-                      v-if="canRegister"
-                      :href="route('register')"
-                      id="login"
-                      class="nav-link"
-                      style="color: black; box-shadow: 50px"
-                    >
-                      Créer un compte
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </template>
-          </nav>
-        </header>
+                <template v-else>
+                  <div class="  ">
+                    <ul class="nav nav-pills">
+                      <li class="nav-item">
+                        <Link
+                          :href="route('login')"
+                          id="login"
+                          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white "
+                          style="color: white; box-shadow: 50px;"
+                        >
+                          Se connecter
+                        </Link>
+                      </li>
+                      <li class="nav-item">
+                        <Link
+                          v-if="canRegister"
+                          :href="route('register')"
+                          id="login"
+                          class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                          style="color: white; box-shadow: 50px"
+                        >
+                          Créer un compte
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </template>
+              </nav>
+            </div>
+          </header>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 
-<style scoped>
+<!-- <style scoped>
 div {
   margin: auto;
-  background: rgb(245, 241, 241);
+  background: rgb(109, 109, 110);
   display: flex;
   padding: 3.5px;
   /* margin-top: 1px; */
   /* height: 50px; */
 
 }
-</style>
+</style> -->
+
+
+
+
+      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
 
