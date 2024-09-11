@@ -16,13 +16,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
+Route::get('/home', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::resource('articles', ArticleController::class)
-//     ->only(['index'])
-//     ->middleware(['auth', 'verified']);
 
 Route::get('/articles', function () {
     // return Inertia::render('Article');
@@ -46,9 +43,7 @@ Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->nam
 
 
 
-
-
-
+// Route pour le profil 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

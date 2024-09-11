@@ -7,41 +7,36 @@ defineProps(["articles"]);
 
 <template>
   <AuthenticatedLayout>
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      Bienvenu sur le composant article
-    </h2>
     <NavLink
       :href="route('article.create')"
-      class="bg-blue-500 text-white p-2 rounded-lg text-xl hover:bg-indigo-500"
+      class="text-black p-2 rounded-lg text-xl hover:bg-bl-500 mx-3 mb-3"
     >
       Créer un article
     </NavLink>
 
-    <div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div
-        class="card-body"
+        class="grid gap-4 mt-3 mx-3"
         v-for="article in articles"
         :key="article.id"
         :article="article"
       >
-        <img
-          src="../Pages/images/pexels-divinetechygirl-1181271.jpg"
-          alt=""
-          style="width: 90rem; margin: 0 auto"
+         <!-- Lier le chemin de l'image à l'attribut src -->
+         <img
+          :src="`/storage/${article.image }`"
+          alt="Image de couverture"
+
+          class="max-w-sm rounded border bg-white p-1 dark:border-neutral-700 dark:bg-neutral-800"
         />
         <h1
-          style="
-            text-align: center;
-            font-size: 50px;
-            font-family: 'Times New Roman', Times, serif;
-          "
+
         >
           {{ article.title }}
         </h1>
-        <p style="text-align: center; ">{{ article.body }}</p>
+        <p >{{ article.body }}</p>
         <NavLink
           :href="route('articles.edit', article.id)"
-          class="bg-blue-500 text-white p-2 rounded-lg text-xl"
+          class="bg-blue-400 text-white p-2 rounded-lg text-xl mt-3 "
         >
           Editer l'article
         </NavLink>
@@ -49,7 +44,7 @@ defineProps(["articles"]);
           as="button"
           :href="route('articles.destroy', article.id)"
           method="delete"
-          class="bg-red-500 text-white p-2 rounded-lg text-xl hover:bg-red-600"
+          class="bg-red-500 text-white p-2 rounded-lg text-xl hover:bg-red-600 mt-2"
         >
           Supprimer
         </NavLink>

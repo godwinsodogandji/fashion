@@ -2,9 +2,9 @@
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { useForm } from "@inertiajs/vue3";
-import InputError from '@/Components/InputError.vue';
+import InputError from "@/Components/InputError.vue";
 
-const props = defineProps(['article']);
+const props = defineProps(["article"]);
 
 // Initialisez le formulaire avec les données de l'article existant
 const form = useForm({
@@ -15,7 +15,7 @@ const form = useForm({
 
 // Méthode de soumission du formulaire
 const submit = () => {
-  form.put(route('articles.update', props.article.id), {
+  form.put(route("articles.update", props.article.id), {
     onSuccess: () => form.reset(),
   });
 };
@@ -23,32 +23,34 @@ const submit = () => {
 
 <template>
   <AuthenticatedLayout>
-    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-      <form @submit.prevent="submit">
-        <input
-          v-model="form.title"
-          placeholder="Entrer un titre"
-          class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-        />
-        <InputError :message="form.errors.title" class="mt-2" />
+    <div>
+      <form @submit.prevent="submit" class="max-w-sm mx-auto">
+        <div class="mb-5">
+          <input
+            v-model="form.title"
+            placeholder="Entrer un titre"
+            class="mt-5 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          />
+          <InputError :message="form.errors.title" class="mt-2" />
 
-        <textarea
-          v-model="form.body"
-          placeholder="Entrer un texte"
-          class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-        />
+          <textarea
+            v-model="form.body"
+            placeholder="Entrer un texte"
+            class="mt-3 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          />
 
-        <InputError :message="form.errors.body" class="mt-2 mx-3" />
+          <InputError :message="form.errors.body" class="mt-2 mx-3" />
 
-        <input
-          type="file"
-          placeholder="Choisir une image"
-          class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-        />
+          <input
+            type="file"
+            placeholder="Choisir une image"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-3"
+          />
 
-        <InputError :message="form.errors.image" class="mt-2 mx-3" />
+          <InputError :message="form.errors.image" class="mt-2 mx-3" />
 
-        <PrimaryButton class="mt-4">Sauvegarder</PrimaryButton>
+          <PrimaryButton class="mt-4">Sauvegarder</PrimaryButton>
+        </div>
       </form>
 
       <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
